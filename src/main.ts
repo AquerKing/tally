@@ -1,4 +1,11 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import router from "@/router/index.ts";
 
-createApp(App).mount("#app");
+import "virtual:uno.css";
+
+import "@styles/theme.css";
+
+createApp(App)
+    .use(router)
+    .mount("#app");

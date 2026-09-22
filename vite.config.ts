@@ -1,12 +1,16 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-// @ts-expect-error type error without @types/node package
-import process from "node:process";
+import { fileURLToPath } from "node:url";
+import UnoCSS from "unocss/vite";
+
 const host = process.env.TAURI_DEV_HOST;
 
 // https://vite.dev/config/
 export default defineConfig(() => ({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    UnoCSS(),
+  ],
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
@@ -19,14 +23,23 @@ export default defineConfig(() => ({
     host: host || false,
     hmr: host
       ? {
-          protocol: "ws",
-          host,
-          port: 1421,
-        }
+        protocol: "ws",
+        host,
+        port: 1421,
+      }
       : undefined,
     watch: {
       // 3. tell Vite to ignore watching `src-tauri`
       ignored: ["**/src-tauri/**"],
     },
   },
+
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "@components": fileURLToPath(new URL("./src/components", import.meta.url)),
+      "@styles": fileURLToPath(new URL("./src/styles", import.meta.url)),
+      "@assets": fileURLToPath(new URL("./src/assets", import.meta.url)),
+    },
+  }
 }));
