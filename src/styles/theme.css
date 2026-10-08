@@ -10,23 +10,23 @@
     --border-color: rgba(0, 0, 0, 0.08);
     --shadow-color: rgba(0, 0, 0, 0.06);
 
-    --accent: #cd853f;
-
     --icon-color: var(--text-secondary);
+
+    --button-bg-color: color-mix(in srgb, var(--bg-primary) 0%, transparent);
+    --button-bg-color-hover: color-mix(in srgb, var(--text-primary) 4%, transparent);
+    --button-bg-color-active: color-mix(in srgb, var(--text-primary) 10%, transparent);
 }
 
 [data-theme='dark'] {
     --bg-primary: #1e1e1e;
     --bg-secondary: #252526;
     --bg-elevated: #2d2d30;
-    
+
     --text-primary: #e8e8e8;
     --text-secondary: #b0b0b0;
-    
+
     --border-color: rgba(255, 255, 255, 0.08);
     --shadow-color: rgba(0, 0, 0, 0.4);
-    
-    --accent: #d99a5b;
 }
 
 html,
@@ -38,4 +38,18 @@ body {
     transition: background-color 0.25s ease, color 0.25s ease;
 
     font-size: 16px;
+}
+
+.borderless-button {
+    background-color: var(--button-bg-color);
+    border: 0;
+    border-radius: 6px;
+}
+
+.borderless-button:hover {
+    background-color: var(--button-bg-color-hover);
+}
+
+.borderless-button:active {
+    background-color: var(--button-bg-color-active);
 }
